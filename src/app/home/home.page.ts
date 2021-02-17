@@ -10,11 +10,8 @@ export class HomePage {
     userName: string,
     message: string,
     createdDate: any,
-  } = {
-    userName: 'Kohki Nakamura',
-    message: 'これはテストメッセージです',
-    createdDate: '10分前',
   };
+  message: string;
 
   posts: { userName: string, message: string, createdDate: any }[] = [
     {
@@ -29,6 +26,16 @@ export class HomePage {
     },
   ];
 
-  constructor() {}
+  addPost() {
+    this.post = {
+      userName: 'Kohki Nakamura',
+      message: this.message,
+      createdDate: '数秒前',
+    };
 
+    this.posts.push(this.post);
+    this.message = '';
+  }
+
+  constructor() {}
 }
