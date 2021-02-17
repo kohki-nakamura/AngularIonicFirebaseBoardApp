@@ -48,4 +48,8 @@ export class LoginPage implements OnInit {
       await toast.present();
     });
   }
+
+  gotoSignup() {
+    this.router.navigateByUrl('/signup');
+  }
 }
