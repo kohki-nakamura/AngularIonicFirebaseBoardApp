@@ -17,7 +17,7 @@
     </ion-list>
   </form>
 
-  <ion-card class="singlePost">
+  <ion-card class="singlePost" *ngFor="let post of posts">
     <ion-item>
       <h2 padding-vertical>{{post.userName}}</h2>
     </ion-item>
