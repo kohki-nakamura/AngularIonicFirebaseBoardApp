@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import{ AlertController, ToastController }from'@ionic/angular';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
@@ -29,6 +30,7 @@ export class HomePage implements OnInit {
     private toastCtrl: ToastController,
     private afStore: AngularFirestore,
     private afAuth: AngularFireAuth, 
+    private router: Router,
   ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
@@ -46,6 +48,7 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
+    this.afStore.firestore.enableNetwork();
     // コンポーネントの初期化時に、投稿を読み込むgetPosts()を実行
     this.getPosts();
   }
@@ -171,5 +174,25 @@ export class HomePage implements OnInit {
   differenceTime(time: Date): string {
     moment.locale('ja');
     return moment(time).fromNow();
+  }
+
+  logout() {
+    this.afStore.firestore.disableNetwork();
+    this.afAuth.signOut()
+    .then(async () => {
+      const toast = await this.toastCtrl.create({
+        message: 'ログアウトしました',
+        duration: 3000,
+      });
+      await toast.present();
+      this.router.navigateByUrl('/login');
+    })
+    .catch(async error => {
+      const toast = await this.toastCtrl.create({
+        message: error.toString(),
+        duration: 3000,
+      });
+      await toast.present();
+    });
   }
 }

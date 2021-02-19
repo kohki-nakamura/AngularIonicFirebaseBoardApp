@@ -1,8 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Ionic 掲示板
-    </ion-title>
+    <ion-title>Ionic 掲示板</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button end fill="clear" (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
